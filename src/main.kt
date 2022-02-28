@@ -26,14 +26,11 @@ fun main() {
 
     while (choice != 3) {
         print("Quote for a Commerical customer (1), Residential customer (2), or quit (3) ... (enter 1, 2 or 3): ")
-        try {
-            choice = readLine()!!.toInt()
+        try { choice = readLine()!!.toInt() }
+        catch (e: NumberFormatException) {
+            println("  *** Exception, Please try again *** ")
+            choice = 0
         }
-        catch (exception: NumberFormatException) {
-
-        }
-
-
 
 // Choice = 1 for Commercial Customers, get keyboard entry, get cost to maintain lawn, print quote
         if (choice == 1) {
@@ -44,7 +41,11 @@ fun main() {
             print("  Customer Address: ")
             cust_commercial.customerAddress = readLine()!!.toString()
             print("  Square footage of the property: ")
-            cust_commercial.squareFootage = readLine()!!.toDouble()
+            try { cust_commercial.squareFootage = readLine()!!.toDouble() }
+            catch (e: NumberFormatException) {
+                println("  *** Exception, Defaults to Square Footage of 10,000 *** ")
+                cust_commercial.squareFootage = 10000.00
+            }
             print("  Property name: ")
             cust_commercial.propertyName = readLine()!!.toString()
             print("  Do we maintain multiple properties for this customer (enter y or n): ")
@@ -69,7 +70,11 @@ fun main() {
             print("  Customer Address: ")
             cust_residential.customerAddress = readLine()!!.toString()
             print("  Square footage of the property: ")
-            cust_residential.squareFootage = readLine()!!.toDouble()
+            try {cust_residential.squareFootage = readLine()!!.toDouble() }
+            catch (e: NumberFormatException) {
+                println("  *** Exception, Defaults to Square Footage of 5,000 ***")
+                cust_residential.squareFootage = 5000.00
+            }
             print("  Senior Discount (enter true or false): ")
             cust_residential.senior = readLine()!!.toBoolean()
 
